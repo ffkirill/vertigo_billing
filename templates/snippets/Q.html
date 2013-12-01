@@ -1,0 +1,17 @@
+{% if show_Q %}
+<form class="form-inline" role="search" method="get" action=""
+      xmlns="http://www.w3.org/1999/html">
+    <div class="form-group">
+        <div class="input-group">
+        <input type="text" class="form-control" name="Q"
+               placeholder="Быстрый поиск" value="{{ Q }}">
+        <span class="input-group-btn">
+            {% if Q %}
+                <a class="btn btn-default" href="{{ request.path }}"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </span>
+        </div>
+    </div>
+</form>
+{% endif %}

@@ -1,0 +1,24 @@
+{% extends 'clients/base.html' %}
+{% block sidebar %}
+    <li>
+        <a href="{% url 'clients:add' %}?next={{ request.path }}"
+           class="btn">Создать новую запись</a>
+    </li>
+{% endblock %}
+{% block content %}
+
+    {% if is_paginated %}
+    <ul class="pagination pagination-top">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+    {% endif %}
+
+    {% for person in object_list %}
+{% include 'clients/person_list_item.html' %}
+    {% endfor %}
+
+    <ul class="pagination">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "tokens/reading_base.html" %}
+{% block response_content %}
+<form action="" method="post">{% csrf_token %}
+    <fieldset>
+        {{form}}
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Произвести обработку">
+</form>
+{% endblock %}

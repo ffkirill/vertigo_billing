@@ -1,0 +1,13 @@
+{% extends 'accounting/base.html' %}
+{% block document %}
+
+<form action="" method="post">{% csrf_token %}
+    <fieldset>
+        <legend>
+            Учетная запись "{{ object.person }}" будет {% if object.disabled %}разблокирована{% else %}заблокирована{% endif %}.
+        </legend>
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Продолжить">
+    <a class="btn" href="{{ next|safe }}">Отмена</a>
+</form>
+{% endblock %}

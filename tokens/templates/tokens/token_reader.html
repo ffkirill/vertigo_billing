@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Терминал</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/starter-template.css" %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+
+</head>
+<body>
+<h1 id="messageBox" class="container text-center">Поднесите браслет к считывателю.</h1>
+
+<div id="messageStarted" class="hidden">
+    <p>Добро пожаловать, {0}!</p>
+    <p>Установка "{1}" запущена.</p>
+</div>
+
+<div id="messageStoped" class="hidden">
+    <p>До свидания, {0}!</p>
+    <p>Установка "{1}" остановлена.</p>
+</div>
+
+<div id="messageError" class="hidden">
+    <p>Ошибка:</p>
+    {0}
+    <p>Пожалуйста, обратитесь к администратору.</p>
+</div>
+
+
+<script src="{% static "js/jquery-1.10.2.min.js" %}"></script>
+<script>
+    var processor_url="{% url "tokens:process" %}"
+</script>
+<script src="{% static "js/csrf_ajax.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/reader_processor.js" %}"></script>
+</body>
+</html>

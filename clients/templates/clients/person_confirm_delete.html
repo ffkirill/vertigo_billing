@@ -1,0 +1,13 @@
+{% extends 'clients/base.html' %}
+{% block document %}
+
+<form action="" method="post">{% csrf_token %}
+    <fieldset>
+        <legend>
+            Учетная запись "{{ object }}" будет удалена.
+        </legend>
+    </fieldset>
+    <input type="submit" class="btn btn-primary btn-danger" value="Продолжить">
+    <a class="btn" href="{{ next }}">Отмена</a>
+</form>
+{% endblock %}

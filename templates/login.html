@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block document %}
+    {% if user.is_active %}
+        <h1>{{ user }} - Вход в систему произведен.</h1>
+    {% else %}
+        {{ form.non_field_errors }}
+        <h1>Для входа в систему воспользуйтесь формой вверху страницы.</h1>
+    {% endif %}
+{% endblock %}

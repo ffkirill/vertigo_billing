@@ -1,0 +1,49 @@
+{% load ordering_tags %}
+<div class="list-group">
+    <div class="list-group-item user-item" id="cable_{{ cable.pk }}">
+        <h4 class="list-group-item-heading">{{ cable }}
+        {% if cable.disabled %}
+            <div class="badge alert-danger">Заблокирован</div>
+        {% endif %}
+        </h4>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>{% ordering "Идентификатор:" "pk" %}</strong>
+            </div>
+            <div class="col-md-8">
+                <span>{{ cable.pk }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>{% ordering "Наименование:" "name" %}</strong>
+            </div>
+            <div class="col-md-8">
+                <span>{{ cable.name }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>{% ordering "Тариф:" "rate" %}</strong>
+            </div>
+            <div class="col-md-8">
+                <span>{{ cable.rate }}</span>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'cable_systems:change_cable' pk=cable.pk %}?next={{ request.get_full_path }}#cable_{{ cable.pk }}">Редактировать</a>
+            </li>
+            <li>
+                <a href="{% url 'cable_systems:disable_cable' cable.pk %}?next={{ request.get_full_path }}#cable_{{ cable.pk }}">
+                {% if cable.disabled %}Разблокировать{% else %}Заблокировать{% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'cable_systems:delete_cable' cable.pk %}?next={{ request.get_full_path }}#cable_{{ cable.pk }}">Удалить</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

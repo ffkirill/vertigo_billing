@@ -1,0 +1,6 @@
+{% extends 'tokens/base.html' %}
+{% load staticfiles %}
+{% block document %}
+    {% include 'snippets/modelform.html' %}
+    <script src="{% static "js/edit_helper.js" %}"></script>
+{% endblock %}

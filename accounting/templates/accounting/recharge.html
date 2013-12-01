@@ -1,0 +1,10 @@
+{% extends 'accounting/base.html' %}
+{%  block content %}
+<form action="" method="post">{% csrf_token %}
+    <fieldset>
+        {{form}}
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Сохранить">
+    <a class="btn" href="{{ next }}">Отмена</a>
+</form>
+{% endblock %}

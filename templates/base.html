@@ -1,0 +1,138 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/starter-template.css" %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    {% block head-extra %} {% endblock %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+{% block navbar %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% block navbar-brand %}
+                    <img src="{% static "img/v.png" %}" class="pull-left">
+                    <a class="navbar-brand {% ifequal request.path "/" %}active{% endifequal %}"
+                       href="/">
+                        Vertigo Billing
+                    </a>
+                {% endblock %}
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{% block clients_href_class %}{% endblock %}">
+                        <a href="{% url 'clients:clients' %}">Посетители</a>
+                    </li>
+                    <li class="{% block accounting_href_class %}{% endblock %}">
+                        <a href="{% url 'accounting:accounting' %}">Платежи</a>
+                    </li>
+                    <li class="dropdown {% block tokens_href_class %}{% endblock %}">
+                        <a data-toggle="dropdown" href="#">RFID Браслеты</a>
+                        <ul class="dropdown-menu" role="menu"
+                            aria-labelledby="dLabel">
+                            <li><a href="{% url 'tokens:tokens' %}">RFID Браслеты</a></li>
+                            <li><a href="{% url 'tokens:readers' %}">RFID Считыватели</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown {% block cables_href_class %}{% endblock %}">
+                        <a data-toggle="dropdown" href="#">Буксировочные установки</a>
+                        <ul class="dropdown-menu" role="menu"
+                            aria-labelledby="dLabel">
+                            <li><a href="{% url 'cable_systems:cables' %}">Буксировочные установки</a></li>
+                            <li><a href="{% url 'cable_systems:sessions' %}">Сеансы</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                {% if user.is_active %}
+                    <div class="navbar-text navbar-right current-user">
+                        <span class="glyphicon glyphicon-user"></span>{{ user }}
+                        <a class="btn btn-primary btn-xs"
+                           href="{% url 'common:logout' %}?next=/">Выйти</a>
+                    </div>
+                {% else %}
+                    <form class="navbar-form navbar-right" role="search"
+                          action="{% url 'common:login' %}"
+                          method="post">{% csrf_token %}
+                        <div class="form-group">
+                            <input name="username"
+                                   type="text" class="form-control"
+                                   placeholder="Имя пользователя" required
+                                   autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input name="password"
+                                   type="password" class="form-control"
+                                   placeholder="Пароль" required>
+                        </div>
+                        <input type="hidden" name="this_is_the_login_form"
+                               value="1"/>
+                        <input type="hidden" name="next"
+                                {% if next %}
+                               value="{{ next }}"
+                                {% else %}
+                               value="{{ request.path }}"
+                                {% endif %} />
+                        <button class="btn btn-primary btn-xs" type="submit">
+                            Войти
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+            <!--/.nav-collapse -->
+
+            {% block navbar-inner %} {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+<div class="container">
+    {% block document %}
+        <div class="row">
+            <div class="col-md-3">
+                <div class="bs-sidebar hidden-print well well-sm" data-spy="affix" data-offset-top="55"
+                     role="complementary">
+                    {% include 'snippets/Q.html' %}
+                    <ul class="nav nav-list bs-sidenav">{% block sidebar %}{% endblock %}</ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static "js/jquery-1.10.2.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+{% block js_extra %}{% endblock %}
+</body>
+</html>

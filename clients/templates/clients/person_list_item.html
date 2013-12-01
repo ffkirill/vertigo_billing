@@ -1,0 +1,115 @@
+{% load ordering_tags %}
+<div class="list-group">
+    <div class="list-group-item user-item" id="person_{{ person.pk }}">
+        <h4 class="list-group-item-heading">{% ordering text=person order_by="string_value" %}</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>{% ordering text="Фамилия:" order_by="surname" %}</strong>
+                    </div>
+                    <div class="col-md-8">
+                                <span>
+                                    {{ person.surname|default:'не указана' }}
+                                </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>{% ordering "Имя:" "name" %}</strong>
+                    </div>
+                    <div class="col-md-8">
+                                <span>
+                                    {{ person.name|default:'не указана' }}
+                                </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>{% ordering "Отчество:" "last_name" %}</strong>
+                    </div>
+                    <div class="col-md-8">
+                                <span>
+                                    {{ person.last_name|default:'не указано' }}
+                                </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Телефон:</strong>
+                    </div>
+                    <div class="col-md-9">
+                                <span>
+                                    {{ person.phone|default:'не указан' }}
+                                </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Email:</strong>
+                    </div>
+                    <div class="col-md-9">
+                                <span>
+                                    {{ person.email|default:'не указан' }}
+                                </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <h5 class="list-group-item-heading">Комментарий:</h5>
+        <pre>{{ person.comment|default:"не указан" }}</pre>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>{% ordering "Номер лицевого счета:" "account__pk" %}</strong>
+            </div>
+            <div class="col-md-3">
+                <span>{{ person.account.pk }}</span>
+                {% if person.account.disabled %}
+                    <div class="badge alert-danger">Заблокирован</div>
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                <strong>{% ordering "Остаток:" "account__balance" %}</strong>
+            </div>
+            <div class="col-md-4">
+                <span>{{ person.account.balance }} руб.</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if person.token %}
+                    <strong>
+                        Закреплен браслет:
+                    </strong>
+                    {{ person.token.name }}
+                {% else %}
+                    <strong>
+                        Браслет не закреплен.
+                    </strong>
+                {% endif %}
+            </div>
+        </div>
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'clients:change' pk=person.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">Редактировать</a>
+            </li>
+            <li>
+                <a href="{% url 'accounting:disable' person.account.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">
+                {% if person.account.disabled %}Разблокировать{% else %}Заблокировать{% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'clients:delete' person.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">Удалить</a>
+            </li>
+            <li class="navbar-right">
+                <a href="{% url 'accounting:recharge' %}?account={{ person.account.pk }}&next={{ request.get_full_path }}#person_{{ person.pk }}">Пополнить счет..</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

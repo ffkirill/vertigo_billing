@@ -1,0 +1,48 @@
+<div class="list-group">
+    <div class="list-group-item user-item" id="token_{{ token.pk }}">
+        <h4 class="list-group-item-heading">{{ token }}
+        {% if token.disabled %}
+            <div class="badge alert-danger">Заблокирован</div>
+        {% endif %}
+</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Наименование:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ token.name }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Владелец:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ token.person|default:"Не закреплен" }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Ключ:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ token.value }}</span>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'tokens:change_token' pk=token.pk %}?next={{ request.get_full_path }}#token_{{ token.pk }}">Редактировать</a>
+            </li>
+            <li>
+                <a href="{% url 'tokens:disable_token' token.pk %}?next={{ request.get_full_path }}#token_{{ token.pk }}">
+                {% if token.disabled %}Разблокировать{% else %}Заблокировать{% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'tokens:delete_token' token.pk %}?next={{ request.get_full_path }}#token_{{ token.pk }}">Удалить</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

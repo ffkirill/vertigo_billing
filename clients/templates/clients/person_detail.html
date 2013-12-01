@@ -1,0 +1,10 @@
+{% extends 'clients/base.html' %}
+{% block document %}
+{% if next %}
+    <p>
+        <a href="{{ next }}" class="btn btn-primary btn-default">Назад</a>
+    </p>
+{% endif %}
+{% include 'clients/person_list_item.html' %}
+
+{% endblock %}

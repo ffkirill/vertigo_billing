@@ -1,0 +1,25 @@
+{% extends 'tokens/base.html' %}
+{% block title %}RFID считыватели{% endblock %}
+{% block sidebar %}
+    <li>
+        <a href="{% url 'tokens:add_reader' %}?next={{ request.path }}"
+           class="btn">Создать новую запись</a>
+    </li>
+{% endblock %}
+{% block content %}
+
+    {% if is_paginated %}
+    <ul class="pagination pagination-top">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+    {% endif %}
+
+    {% for tokenreader in object_list %}
+        {% include 'tokens/tokenreader_list_item.html' %}
+    {% endfor %}
+
+    <ul class="pagination">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+
+{% endblock %}

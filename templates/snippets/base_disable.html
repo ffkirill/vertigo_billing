@@ -1,0 +1,9 @@
+<form action="" method="post">{% csrf_token %}
+    <fieldset>
+        <legend>
+            Запись "{{ object }}" будет {% if object.disabled %}разблокирована{% else %}заблокирована{% endif %}.
+        </legend>
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Продолжить">
+    <a class="btn" href="{{ next }}">Отмена</a>
+</form>

@@ -1,0 +1,8 @@
+{% extends "tokens/reading_base.html" %}
+{% block response_content %}
+    {% if active %}
+        <h1>Добро пожаловать, {{ person.surname }} {{ person.name }} {{ person.last_name }} </h1>
+    {% else %}
+        <h1>До свидания, {{ person.surname }} {{ person.name }} {{ person.last_name }} </h1>
+    {% endif %}
+{% endblock %}

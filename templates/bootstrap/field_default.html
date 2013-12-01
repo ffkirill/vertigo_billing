@@ -1,0 +1,12 @@
+<div id="div_{{ label_id }}" class="form-group{% if bf_raw.field.required %} required{% endif %}{% if errors %} has-error{% endif %}">
+    <label class="control-label" for="{{ label_id }}">{{ label }}</label>
+{#    <div class="controls">#}
+        {{ bf }}
+        {% if errors %}
+            <span class="help-block">{{ errors }}</span>
+        {% endif %}
+        {% if help_text %}
+            <p class="help-block">{{ help_text }}</p>
+        {% endif %}
+{#    </div>#}
+</div>

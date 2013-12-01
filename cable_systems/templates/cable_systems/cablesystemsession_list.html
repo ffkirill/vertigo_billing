@@ -1,0 +1,55 @@
+{% extends 'cable_systems/base.html' %}
+{% load staticfiles %}
+
+
+{% block head-extra %}
+    <link href="{% static "css/datepicker.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block js_extra %}
+    <script src="{% static "js/bootstrap-datepicker.js" %}"></script>
+    <script src="{% static "js/bootstrap-datepicker.ru.js" %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    {% load ordering_tags %}
+    {% include 'snippets/date_range_selector.html' %}
+    {% if is_paginated %}
+        <ul class="pagination pagination-top">
+            {% include 'snippets/pagination.html' %}
+        </ul>
+    {% endif %}
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{% ordering text="Дата и время начала" order_by="date_start" %}</th>
+            <th>{% ordering text="Лебедка" order_by="cable" %}</th>
+            <th>{% ordering text="Посетитель" order_by="person" %}</th>
+            <th>{% ordering text="Дата и время окончания" order_by="date_end" %}</th>
+            <th>Активность</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for session in object_list %}
+            <tr>
+                <td>{{ forloop.counter }}.</td>
+                <td>{{ session.date_start }}</td>
+                <td>{{ session.cable }}</td>
+                <td>
+                    <a href="{{ session.person.get_absolute_url }}?next={{ request.get_full_path }}">{{ session.person }}</a>
+                </td>
+                <td>{{ session.date_end }}</td>
+                <td>{% if session.active %}Активна{% else %}
+                    Завершена{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% include 'snippets/pagination.html' %}
+        </ul>
+    {% endif %}
+{% endblock %}

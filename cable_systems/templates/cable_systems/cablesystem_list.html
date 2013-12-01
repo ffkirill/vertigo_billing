@@ -1,0 +1,25 @@
+{% extends 'cable_systems/base.html' %}
+{% block title %}Буксировочные установки{% endblock %}
+{% block sidebar %}
+    <li>
+        <a href="{% url 'cable_systems:add_cable' %}?next={{ request.path }}"
+           class="btn">Создать новую запись</a>
+    </li>
+{% endblock %}
+{% block content %}
+
+    {% if is_paginated %}
+    <ul class="pagination pagination-top">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+    {% endif %}
+
+    {% for cable in object_list %}
+        {% include 'cable_systems/cablesystem_list_item.html' %}
+    {% endfor %}
+
+    <ul class="pagination">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+
+{% endblock %}

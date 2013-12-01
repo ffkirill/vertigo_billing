@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Платежи{% endblock %}
+{% block accounting_href_class %}active{% endblock %}
+{% block sidebar %}
+    <li>
+        <a href="{% url 'accounting:recharge' %}"
+           class="btn">Зачисление на лицевой счет</a>
+        <a href="{% url 'accounting:movements' %}"
+           class="btn">Движения по лицевым счетам</a>
+    </li>
+{% endblock %}

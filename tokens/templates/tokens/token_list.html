@@ -1,0 +1,26 @@
+{% extends 'tokens/base.html' %}
+{% load staticfiles %}
+{% block title %}RFID браслеты{% endblock %}
+{% block sidebar %}
+    <li>
+        <a href="{% url 'tokens:add_token' %}?next={{ request.path }}"
+           class="btn">Создать новую запись</a>
+    </li>
+{% endblock %}
+{% block content %}
+
+    {% if is_paginated %}
+    <ul class="pagination pagination-top">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+    {% endif %}
+
+    {% for token in object_list %}
+{% include 'tokens/token_list_item.html' %}
+    {% endfor %}
+
+    <ul class="pagination">
+        {% include 'snippets/pagination.html' %}
+    </ul>
+    <script src="{% static "js/edit_helper.js" %}"></script>
+{% endblock %}

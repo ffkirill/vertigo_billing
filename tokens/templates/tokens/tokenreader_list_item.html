@@ -1,0 +1,48 @@
+<div class="list-group">
+    <div class="list-group-item user-item" id="token_{{ tokenreader.pk }}">
+        <h4 class="list-group-item-heading">{{ tokenreader }}
+        {% if tokenreader.disabled %}
+            <div class="badge alert-danger">Заблокирован</div>
+        {% endif %}
+</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Наименование:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ tokenreader.description }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Идентификатор:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ tokenreader.uid }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Буксировочная установка:</strong>
+            </div>
+            <div class="col-md-9">
+                <span>{{ tokenreader.cable_system }}</span>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'tokens:change_reader' pk=tokenreader.pk %}?next={{ request.get_full_path }}#token_{{ tokenreader.pk }}">Редактировать</a>
+            </li>
+            <li>
+                <a href="{% url 'tokens:disable_reader' tokenreader.pk %}?next={{ request.get_full_path }}#token_{{ tokenreader.pk }}">
+                {% if tokenreader.disabled %}Разблокировать{% else %}Заблокировать{% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'tokens:delete_reader' tokenreader.pk %}?next={{ request.get_full_path }}#token_{{ tokenreader.pk }}">Удалить</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
