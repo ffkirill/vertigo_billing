@@ -18,7 +18,8 @@ class ModelWithDisabledMark(models.Model):
 
     disabled = models.BooleanField(verbose_name=_("Disabled"),
                                    null=False,
-                                   blank=False)
+                                   blank=False,
+                                   default=False)
 
     def disable(self):
         self.disabled = True

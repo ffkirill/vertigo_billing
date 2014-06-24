@@ -105,6 +105,7 @@ class DisableView(SuccessURLInRequestMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         ob = self.get_object()
+        self.object = ob
         if ob.disabled:
             ob.enable()
         else:

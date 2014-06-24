@@ -99,9 +99,11 @@
                 <a href="{% url 'clients:change' pk=person.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">Редактировать</a>
             </li>
             <li>
+                {% if person.account.pk %}
                 <a href="{% url 'accounting:disable' person.account.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">
                 {% if person.account.disabled %}Разблокировать{% else %}Заблокировать{% endif %}
                 </a>
+                {% endif %}
             </li>
             <li>
                 <a href="{% url 'clients:delete' person.pk %}?next={{ request.get_full_path }}#person_{{ person.pk }}">Удалить</a>
