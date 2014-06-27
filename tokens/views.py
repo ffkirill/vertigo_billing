@@ -46,8 +46,8 @@ class TokenCreateView(SuccessURLInRequestMixin,
 
 
 class ReaderCreateView(SuccessURLInRequestMixin,
-                      PermissionRequiredMixin,
-                      CreateView):
+                       PermissionRequiredMixin,
+                       CreateView):
     model = TokenReader
     form_class = TokenReaderModelForm
     permission_required = 'tokens.add_tokenreader'

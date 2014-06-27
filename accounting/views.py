@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DateDetailView
+from django.views.generic import CreateView, ListView
 from django.core.urlresolvers import reverse_lazy
 from common.views import DisableView
 from common.views import SuccessURLInRequestMixin

@@ -44,7 +44,7 @@ class Message(models.Model):
         verbose_name=_("recipients"))
 
     @classmethod
-    @transaction.commit_on_success
+    @transaction.atomic
     def create_message(cls, body, recipients, sender=None, content_object=None,
                        request=None):
         m = cls.objects.create(sender=sender, body=body,

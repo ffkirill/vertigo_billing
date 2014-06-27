@@ -7,7 +7,6 @@ _ORDERING_DICT = defaultdict(str, {'desc': '-'})
 
 
 class ListViewQMixin(object):
-
     filter_query_field = None
     filter_expr = None
 
@@ -33,10 +32,10 @@ class RangeBasedViewMixin(object):
         date_start = DateField(required=False)
         date_end = DateField(required=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.date_start = None
         self.date_end = None
-        super(RangeBasedViewMixin, self).__init__(*args, **kwargs)
+        super(RangeBasedViewMixin, self).__init__()
 
     def get_queryset(self):
         qs = super(RangeBasedViewMixin, self).get_queryset()
@@ -45,9 +44,9 @@ class RangeBasedViewMixin(object):
             self.date_start = range_form.cleaned_data['date_start']
             self.date_end = range_form.cleaned_data['date_end']
         if self.date_start:
-            qs = qs.filter(**{self.date_field+"__gte": self.date_start})
+            qs = qs.filter(**{self.date_field + "__gte": self.date_start})
         if self.date_end:
-            qs = qs.filter(**{self.date_field+"__lte": self.date_end})
+            qs = qs.filter(**{self.date_field + "__lte": self.date_end})
         return qs
 
     def get_context_data(self, **kwargs):
@@ -62,22 +61,24 @@ class RangeBasedViewMixin(object):
         return cd
 
 
-class ListViewSortMixin(object):
+class ListViewSortMixin(ListViewQMixin):
     order_by_param = 'order_by',
     direction_param = 'order'
     possible_order_fields = None
 
     def get_queryset(self):
         qs = super(ListViewQMixin, self).get_queryset()
-        direction = _ORDERING_DICT[self.request.REQUEST
-                                   .get(self.direction_param)]
+        direction = _ORDERING_DICT[
+            self.request.REQUEST.get(self.direction_param)
+        ]
 
         field = self.request.REQUEST.get(self.order_by_param)
 
-        if (field and self.possible_order_fields and
-                field in self.possible_order_fields
-           or field and self.possible_order_fields is None):
-            qs = qs.order_by([direction+field])
+        if (field and
+                self.possible_order_fields and
+                field in self.possible_order_fields or
+                field and self.possible_order_fields is None):
+            qs = qs.order_by([direction + field])
         return qs
 
     def get_context_data(self, **kwargs):
@@ -96,7 +97,8 @@ class SuccessURLInRequestMixin(object):
         return cd
 
     def get_success_url(self):
-        self.success_url = self.request.GET.get('next', self.__get_success_url())
+        self.success_url = self.request.GET.get('next',
+                                                self.__get_success_url())
         return super(SuccessURLInRequestMixin, self).get_success_url()
 
 

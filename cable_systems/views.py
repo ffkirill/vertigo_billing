@@ -27,7 +27,7 @@ class SessionListView(ListViewQMixin,
                       ListView):
     model = CableSystemSession
     orderable_columns = ('date_start', 'date_end', 'cable', 'person',
-    'active')
+                         'active')
     orderable_columns_default = '-date_end'
     filter_expr = staticmethod(CableSystemSession.filter_expr)
     paginate_by = 15

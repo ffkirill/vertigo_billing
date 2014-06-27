@@ -15,7 +15,7 @@ def ordering(context, text, order_by):
     active = (current_order_by == order_by)
     if active:
         if not current_direction or current_direction == "asc":
-            direction="desc"
+            direction = "desc"
         direction_symbol = "&darr; " if direction == "desc" else "&uarr; "
     return '<a href="?order_by={0}&ordering={1}">{3}{2}</a>'.format(
         order_by,

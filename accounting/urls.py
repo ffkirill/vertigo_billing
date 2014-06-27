@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import RedirectView
 
 from .views import AccountDisableView
 from .views import AccountRechargeView
@@ -12,5 +12,6 @@ urlpatterns = patterns(
         name="accounting"),
     url(r'^recharge/$', AccountRechargeView.as_view(), name="recharge"),
     url(r'^movements/$', MovementListView.as_view(), name="movements"),
-    url(r'^disable/(?P<pk>\d+)/$', AccountDisableView.as_view(), name="disable"),
+    url(r'^disable/(?P<pk>\d+)/$', AccountDisableView.as_view(),
+        name="disable"),
 )

@@ -47,7 +47,7 @@ class Person(models.Model):
              update_fields=None):
 
         if update_fields is not None:
-            if frozenset('name', 'surname', 'last_name') \
+            if frozenset(('name', 'surname', 'last_name')) \
                & frozenset(update_fields):
                 update_fields.append('string_value')
                 self.string_value = unicode(self)

@@ -32,7 +32,7 @@ class CableSystem(ModelWithDisabledMark):
 
 class CableSystemSessionManager(models.Manager):
 
-    @transaction.commit_on_success
+    @transaction.atomic
     def toggle_active(self, person, cable):
         qs = self.select_for_update().filter(cable=cable,
                                              active=True)

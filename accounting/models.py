@@ -86,20 +86,9 @@ class Movement(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        force_insert = self.pk is None
-        force_update = not force_insert
-
-        if force_update or not self.account:
-            super(Movement, self).save(force_insert, force_update, using,
-                                       update_fields)
-        else:
-
-            if not transaction.is_managed(using=using):
-                transaction.enter_transaction_management(using=using)
-                forced_managed = True
-            else:
-                forced_managed = False
-            try:
+        with transaction.atomic(using=using):
+            force_insert = force_insert or self.pk is None
+            if force_insert:
                 account_data = Account.objects.using(using) \
                     .select_for_update().filter(pk=self.account.pk) \
                     .values('balance', 'disabled')[0]
@@ -112,19 +101,11 @@ class Movement(models.Model):
                                        + self.debit
                                        - self.credit).quantize(Decimal('0.00'))
 
-                super(Movement, self).save(force_insert, force_update, using,
-                                           update_fields)
-
                 Account.objects.using(using).filter(pk=self.account.pk).update(
                     balance=self.balance)
 
-                if forced_managed:
-                    transaction.commit(using=using)
-                else:
-                    transaction.commit_unless_managed(using=using)
-            finally:
-                if forced_managed:
-                    transaction.leave_transaction_management(using=using)
+            super(Movement, self).save(force_insert, force_update, using,
+                                       update_fields)
 
     def __unicode__(self):
         return "{0} Dt:{1} Ct:{2} Bal:{3} Desc:{4}".format(

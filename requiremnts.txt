@@ -1,0 +1,14 @@
+Django==1.6.5
+South==0.8.4
+TornadIO2==0.0.4
+backports.ssl-match-hostname==3.4.0.2
+django-bootstrap-forms==0.1
+django-braces==1.4.0
+django-debug-toolbar==1.2.1
+django-suit==0.2.9
+django-suit-locale==1.0.9
+simplejson==3.5.3
+six==1.7.2
+sqlparse==0.1.11
+tornado==3.2.2
+wsgiref==0.1.2

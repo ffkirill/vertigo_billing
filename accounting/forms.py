@@ -16,8 +16,8 @@ class AccountRechargeModelForm(VertigoBootstrapMixin, ModelForm):
         exclude = ('credit, balance',)
 
     account = ModelChoiceField(
-        queryset=Account.objects.select_related('person')
-            .order_by('person__string_value'),
+        queryset=Account.objects.select_related('person').order_by(
+            'person__string_value'),
         label=_('Account'))
 
     debit = DecimalField(label=_("Amount"),

@@ -17,7 +17,8 @@ class MovementTest(TestCase):
     def test_movement(self):
         self.assertEqual(self.account.balance, 0)
         m = Movement.objects.create(account=self.account,
-                                    debit=10)
+                                    debit=10, pk=777
+        )
         self.assertEqual(Account.objects.get(pk=self.account.pk).balance, 10)
         m.save()
         m.save()
