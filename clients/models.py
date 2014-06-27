@@ -34,7 +34,11 @@ class Person(models.Model):
                              blank=True)
 
     email = models.EmailField(verbose_name=_("Email"),
-                              blank=True)
+                              blank=True,
+                              error_messages={
+                                  'invalid': _('Enter a valid email address.')
+                              }
+    )
 
     comment = models.CharField(verbose_name=_("Comment"),
                                max_length=300,

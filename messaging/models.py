@@ -7,7 +7,7 @@ from django.contrib.contenttypes import generic
 from common.models import QuerySet
 from .utils import send_notification
 
-
+_("Messaging")
 class MessagesQuerySet(QuerySet):
 
     def unread(self):
@@ -18,6 +18,11 @@ class MessagesQuerySet(QuerySet):
 
 
 class Message(models.Model):
+
+    class Meta:
+        verbose_name = _("Message")
+        verbose_name_plural = _("Messages")
+        ordering = ['-date']
 
     objects = MessagesQuerySet.as_manager()
 
@@ -64,6 +69,12 @@ class Message(models.Model):
 
 
 class UsersMessages(models.Model):
+    _("Users messages")
+
+    class Meta:
+        verbose_name = _("Message to users mapping")
+        verbose_name_plural = _("Message to users mappings")
+
     user = models.ForeignKey(get_user_model())
     message = models.ForeignKey(Message)
     unread = models.BooleanField(default=True,

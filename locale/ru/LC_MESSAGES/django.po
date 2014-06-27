@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 18:52+0400\n"
+"POT-Creation-Date: 2014-06-27 21:19+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: accounting/forms.py:21 accounting/models.py:55
+msgid "Account"
+msgstr "Лицевой счет"
+
+#: accounting/forms.py:23
+msgid "Amount"
+msgstr "Сумма"
+
+#: accounting/forms.py:28 accounting/models.py:83
+msgid "Operation description"
+msgstr "Содержание операции"
+
+#: accounting/forms.py:30
+msgid "Account recharge"
+msgstr "Пополнение счета"
+
+#: accounting/forms.py:42
+msgid "Data is correct. Please check again payment details and resubmit form"
+msgstr "Проверьте введенные данные"
 
 #: accounting/models.py:13
 msgid "Accounting"
@@ -31,7 +51,7 @@ msgstr "Лицевой счет посетителя"
 msgid "Accounts"
 msgstr "Лицевые счета"
 
-#: accounting/models.py:26 cable_systems/models.py:78 clients/models.py:14
+#: accounting/models.py:26 cable_systems/models.py:77 clients/models.py:15
 msgid "Person"
 msgstr "Посетитель"
 
@@ -47,10 +67,6 @@ msgstr "Движение по лицевому счету"
 msgid "Accounts movements"
 msgstr "Движения по лицевым счетам"
 
-#: accounting/models.py:55
-msgid "Account"
-msgstr "Лицевой счет"
-
 #: accounting/models.py:59
 msgid "Debit"
 msgstr "Дебит"
@@ -59,27 +75,23 @@ msgstr "Дебит"
 msgid "Credit"
 msgstr "Кредит"
 
-#: accounting/models.py:80
-msgid "Operation description"
-msgstr "Содержание операции"
-
-#: cable_systems/models.py:10
+#: cable_systems/models.py:11
 msgid "Cable_Systems"
 msgstr "Буксировочные установки"
 
-#: cable_systems/models.py:17 cable_systems/models.py:77 tokens/models.py:46
+#: cable_systems/models.py:18 cable_systems/models.py:76 tokens/models.py:53
 msgid "Cable system"
 msgstr "Буксировочная установка"
 
-#: cable_systems/models.py:18
+#: cable_systems/models.py:19
 msgid "Cable systems"
 msgstr "Буксировочные установки"
 
-#: cable_systems/models.py:21
+#: cable_systems/models.py:22
 msgid "Cable system's name"
 msgstr "Наименование буксировочной установки"
 
-#: cable_systems/models.py:24
+#: cable_systems/models.py:25
 msgid "Per hour pay rate"
 msgstr "Почасовой тариф"
 
@@ -87,65 +99,106 @@ msgstr "Почасовой тариф"
 msgid "Cable system use"
 msgstr "Плата за использование буксировочной установки"
 
-#: cable_systems/models.py:73
+#: cable_systems/models.py:72
 msgid "Cable system session"
 msgstr "Сеанс на буксировочной установке"
 
-#: cable_systems/models.py:74
+#: cable_systems/models.py:73
 msgid "Cable systems session"
 msgstr "Сеансы на буксировочных установках"
 
-#: cable_systems/models.py:79
+#: cable_systems/models.py:78
 msgid "Start date and time"
 msgstr "Дата/время начала"
 
-#: cable_systems/models.py:80
+#: cable_systems/models.py:79
 msgid "End date and time"
 msgstr "Дата/время окончания"
 
-#: cable_systems/models.py:81
+#: cable_systems/models.py:80
 msgid "Active"
 msgstr "Активно"
 
-#: clients/forms.py:15 tokens/models.py:14
+#: clients/forms.py:15 tokens/models.py:15
 msgid "RFID Token"
 msgstr "RFID браслет"
 
-#: clients/models.py:6
+#: clients/models.py:7
 msgid "Clients"
 msgstr "Посетители"
 
-#: clients/models.py:15
+#: clients/models.py:16
 msgid "Persons"
 msgstr "Посетители"
 
-#: clients/models.py:18
+#: clients/models.py:19
 msgid "Name"
 msgstr "Имя"
 
-#: clients/models.py:22
+#: clients/models.py:23
 msgid "Surname"
 msgstr "Фамилия"
 
-#: clients/models.py:27
+#: clients/models.py:28
 msgid "Last name"
 msgstr "Отчество"
 
-#: clients/models.py:31
+#: clients/models.py:32
 msgid "Phone number"
 msgstr "Номер телефона"
 
-#: clients/models.py:35
+#: clients/models.py:36
 msgid "Email"
 msgstr "Электронная почта"
 
-#: clients/models.py:38
+#: clients/models.py:39
+msgid "Enter a valid email address."
+msgstr "Введите корректный адрес e-mail"
+
+#: clients/models.py:43
 msgid "Comment"
 msgstr "Комментарий"
 
-#: common/models.py:19
+#: common/models.py:18
 msgid "Disabled"
 msgstr "Заблокировано"
+
+#: messaging/models.py:10
+msgid "Messaging"
+msgstr "Сообщения пользователям"
+
+#: messaging/models.py:23
+msgid "Message"
+msgstr "Сообщение"
+
+#: messaging/models.py:24
+msgid "Messages"
+msgstr "Сообщения"
+
+#: messaging/models.py:30
+msgid "Message body"
+msgstr "Сообщение"
+
+#: messaging/models.py:35
+msgid "sender"
+msgstr "Отправитель"
+
+#: messaging/models.py:49
+msgid "recipients"
+msgstr "Получатели"
+
+#: messaging/models.py:72
+#, fuzzy
+msgid "Users messages"
+msgstr "Сообщения пользователям"
+
+#: messaging/models.py:75
+msgid "Message to users mapping"
+msgstr "Привязка сообщения к пользователям"
+
+#: messaging/models.py:76
+msgid "Message to users mappings"
+msgstr "Привязки сообщений к пользователям"
 
 #: templates/admin/base_site.html:4
 msgid "Billing system admin"
@@ -158,91 +211,96 @@ msgstr "Управление биллингом"
 #: templates/admin/index.html:22
 #, python-format
 msgid "Models in the %(name)s application"
-msgstr ""
+msgstr "Модели приложения %(name)s"
 
 #: templates/admin/index.html:35
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: templates/admin/index.html:41
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: templates/admin/index.html:51
 msgid "You don't have permission to edit anything."
-msgstr ""
+msgstr "У вас нет прав на изменение каких-либо данных"
 
 #: templates/admin/index.html:59
 msgid "Recent Actions"
-msgstr ""
+msgstr "Недавние действия"
 
 #: templates/admin/index.html:60
 msgid "My Actions"
-msgstr ""
+msgstr "Мои действия"
 
 #: templates/admin/index.html:64
 msgid "None available"
-msgstr ""
+msgstr "Нет доступных элементов"
 
 #: templates/admin/index.html:78
 msgid "Unknown content"
-msgstr ""
+msgstr "Неизвестное содержимое"
 
 #: tokens/forms.py:24
-#, fuzzy
 msgid "Invalid token value"
-msgstr "Ключ браслета"
+msgstr "Неверный ключ браслета"
 
 #: tokens/forms.py:31
-#, fuzzy
 msgid "Person account is locked"
-msgstr "Лицевой счет посетителя"
+msgstr "Лицевой счет посетителя заблокирован"
 
 #: tokens/forms.py:35
-#, fuzzy
 msgid "Invalid token reader uid"
-msgstr "Считыватель RFID браслета"
+msgstr "Неверный код считывателя RFID браслета"
 
-#: tokens/models.py:7
+#: tokens/models.py:8
 msgid "Tokens"
 msgstr "RFID браслеты"
 
-#: tokens/models.py:15
+#: tokens/models.py:16
 msgid "RFID Tokens"
 msgstr "RFID браслеты"
 
-#: tokens/models.py:18
+#: tokens/models.py:19
 msgid "Token name"
 msgstr "Наименование браслета"
 
-#: tokens/models.py:19
+#: tokens/models.py:20
 msgid "Token value"
 msgstr "Ключ браслета"
 
-#: tokens/models.py:21
+#: tokens/models.py:22
 msgid "Token owner"
 msgstr "Владелец браслета"
 
-#: tokens/models.py:26
+#: tokens/models.py:32
+#, python-brace-format
 msgid "Token: {0}"
 msgstr "Браслет: {0}"
 
-#: tokens/models.py:27
+#: tokens/models.py:33
+#, python-brace-format
 msgid "Owner: {0}"
 msgstr "Владелец: {0}"
 
-#: tokens/models.py:34
+#: tokens/models.py:41
 msgid "RFID Token reader"
 msgstr "Считыватель RFID браслета"
 
-#: tokens/models.py:35
+#: tokens/models.py:42
 msgid "RFID Token readers"
 msgstr "Считыватели RFID браслетов"
 
-#: tokens/models.py:38
+#: tokens/models.py:45
 msgid "Reader id"
 msgstr "Идентификатор считывателя"
 
-#: tokens/models.py:42
+#: tokens/models.py:49
 msgid "Description"
 msgstr "Описание"
+
+#: tokens/views.py:128
+msgid "Insufficient funds to pay for use of the system"
+msgstr ""
+"Недостаточно средств на счету клиента для списания оплаты за использование "
+"системы"
